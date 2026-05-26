@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Structure Visualizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body data-page="setup">
+  <div class="setup-shell setup-shell-modern">
+    <header class="site-header clean-header">
+      <div class="brand-mark">
+        <div class="brand-mark-icon">DS</div>
+        <div class="brand-mark-copy">
+          <strong>VisuStruct</strong>
+          <span>자료구조 시각화</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="chip-row" id="view-mode-buttons">
+          <button type="button" class="choice-chip active" data-mode="single">단일보기</button>
+          <button type="button" class="choice-chip" data-mode="compare">비교보기</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="setup-main-modern compact-main">
+      <section class="catalog-shell">
+        <div class="catalog-topbar">
+          <div class="chip-row" id="topic-toggle">
+            <button type="button" class="segment-chip active" data-topic="자료구조">자료구조</button>
+            <button type="button" class="segment-chip" data-topic="알고리즘">알고리즘</button>
+          </div>
+
+          <div class="selection-summary">
+            <div class="selection-slot compact-slot" data-slot="0">
+              <span class="selection-slot-label">선택 1</span>
+              <strong class="selection-slot-value">자료구조를 선택해 주세요</strong>
+            </div>
+            <div class="selection-slot compact-slot" data-slot="1">
+              <span class="selection-slot-label">선택 2</span>
+              <strong class="selection-slot-value">비교보기에서만 사용됩니다</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="catalog-panel">
+          <div class="catalog-panel-head tighter-head">
+            <div class="catalog-title-row">
+              <h2 id="catalog-title">자료구조</h2>
+              <p id="catalog-description">데이터의 효율적인 저장과 관리를 위한 구조</p>
+            </div>
+
+            <div class="chip-row filter-row" id="subcategory-buttons">
+              <button type="button" class="filter-chip active" data-filter="전체">전체</button>
+              <button type="button" class="filter-chip" data-filter="선형 자료구조">선형 자료구조</button>
+              <button type="button" class="filter-chip" data-filter="비선형 자료구조">비선형 자료구조</button>
+            </div>
+          </div>
+
+          <div id="catalog-grid" class="catalog-grid catalog-grid-five"></div>
+        </div>
+
+        <div class="catalog-footer-actions">
+          <p id="setup-error" class="status error" hidden></p>
+          <div class="action-row clean-actions">
+            <button type="button" id="clear-selection" class="secondary-btn">선택 초기화</button>
+            <button type="button" id="go-compare" class="primary-btn">시작</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    window.__ALGORITHMS__ = {{ algorithms|tojson }};
+  </script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

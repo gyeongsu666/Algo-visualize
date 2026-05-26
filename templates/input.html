@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input - Data Structure Visualizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body data-page="input">
+  <div class="setup-shell setup-shell-modern">
+    <header class="site-header clean-header">
+      <div class="brand-mark">
+        <div class="brand-mark-icon">DS</div>
+        <div class="brand-mark-copy">
+          <strong>VisuStruct</strong>
+          <span>입력 데이터 설정</span>
+        </div>
+      </div>
+
+      <a href="/" class="ghost-link">← 선택 화면으로 돌아가기</a>
+    </header>
+
+    <main class="setup-main-modern compact-main">
+      <section class="input-workspace">
+        <div class="input-workspace-head">
+          <div>
+            <h1>입력 데이터</h1>
+            <p id="input-page-guide" class="hero-subcopy">선택한 자료구조에 맞게 각각 입력한 뒤 시각화를 시작합니다.</p>
+          </div>
+          <p id="input-page-error" class="status error" hidden></p>
+        </div>
+
+        <div id="input-forms" class="input-form-grid"></div>
+
+        <div class="catalog-footer-actions">
+          <div class="action-row clean-actions">
+            <button type="button" id="input-fill-example" class="secondary-btn">모든 예시 채우기</button>
+            <button type="button" id="go-compare" class="primary-btn">시각화 시작</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    window.__ALGORITHMS__ = {{ algorithms|tojson }};
+  </script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

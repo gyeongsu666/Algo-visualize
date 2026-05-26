@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compare - Data Structure Visualizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body data-page="compare">
+  <div class="compare-shell">
+    <header class="compare-topbar">
+      <div class="compare-topbar-copy">
+        <a href="/" class="ghost-link">← 선택 화면</a>
+      </div>
+
+      <div class="compare-topbar-actions">
+        <div class="action-row compact-actions">
+          <button type="button" id="run-all" title="일괄 실행">▶ 일괄 실행</button>
+          <button type="button" id="pause-all" title="일괄 정지">⏸ 일괄 정지</button>
+        </div>
+        <label class="speed-control">
+          <span>속도 <strong id="speed-label">보통</strong></span>
+          <input id="speed-slider" type="range" min="400" max="2000" step="100" value="1100">
+        </label>
+      </div>
+    </header>
+
+    <main class="compare-main">
+      <section id="panel-grid" class="panel-grid"></section>
+    </main>
+
+    <section class="drawer-shell">
+      <button type="button" id="drawer-toggle" class="drawer-toggle" aria-expanded="true">
+        상세 정보 닫기
+      </button>
+      <div id="drawer-panel" class="drawer-panel">
+        <div class="drawer-tabs">
+          <button type="button" class="drawer-tab" data-drawer-tab="points">비교 포인트</button>
+          <button type="button" class="drawer-tab active" data-drawer-tab="complexity">복잡도</button>
+          <button type="button" class="drawer-tab" data-drawer-tab="logs">실행 로그</button>
+        </div>
+
+        <div class="drawer-content">
+          <section class="drawer-view" data-drawer-view="points">
+            <div id="drawer-points" class="drawer-list"></div>
+          </section>
+          <section class="drawer-view active" data-drawer-view="complexity">
+            <div id="drawer-complexity" class="drawer-list"></div>
+          </section>
+          <section class="drawer-view" data-drawer-view="logs">
+            <div id="drawer-logs" class="drawer-list"></div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <template id="panel-template">
+    <article class="panel">
+      <div class="panel-top">
+        <div>
+          <p class="panel-index"></p>
+          <h2 class="panel-title"></h2>
+        </div>
+        <div class="panel-controls-inline">
+          <button type="button" class="run-btn">▶</button>
+          <button type="button" class="pause-btn">⏸</button>
+          <button type="button" class="next-btn">⏭</button>
+          <button type="button" class="reset-btn">↺</button>
+        </div>
+        <span class="badge"></span>
+      </div>
+
+      <div class="structure-action-bar">
+        <input type="text" class="action-input" placeholder="값 입력">
+        <div class="action-row structure-actions"></div>
+        <span class="action-help"></span>
+      </div>
+
+      <p class="status success">실행을 준비했습니다.</p>
+      <p class="status error" hidden></p>
+
+      <div class="panel-content">
+        <section class="canvas-card">
+          <div class="canvas-stage"></div>
+        </section>
+
+        <section class="code-card">
+          <div class="section-head"><h3>파이썬 코드</h3></div>
+          <pre class="code-block"></pre>
+        </section>
+      </div>
+    </article>
+  </template>
+
+  <script>
+    window.__ALGORITHMS__ = {{ algorithms|tojson }};
+  </script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
